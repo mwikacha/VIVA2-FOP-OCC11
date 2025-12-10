@@ -1,6 +1,5 @@
 package q5_luckydraw;
 
-import java.lang.annotation.Target;
 import java.util.*;
 public class q5luckydraw {
 
@@ -90,6 +89,7 @@ public class q5luckydraw {
                 nearList.add(num);
             }
         }
+        sc.close();
 
         //output result
         if(win) {
