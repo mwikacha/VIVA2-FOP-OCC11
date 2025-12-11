@@ -3,15 +3,12 @@ import java.util.Arrays;
 
 public class AnagramChecker {
 
-    // --- Core Helper Function: Creates a unique, sorted character representation ---
+    //Core Helper Function: Creates a unique, sorted character representation
     //Converts a string into its canonical form (sorted character array turned back into a string).
-    //allows two strings to be compared for anagram status without using HashMaps.
      
     private static String getCanonicalForm(String str) {
-        // Convert to character array
-        char[] chars = str.toCharArray();
         
-        // Sort the array (This is the key to the canonical form)
+        char[] chars = str.toCharArray();
         Arrays.sort(chars);
         
         // Return the sorted string
@@ -24,7 +21,6 @@ public class AnagramChecker {
 
     //Method 1: isAnagram
     //Checks if string 'a' and string 'b' are anagrams by comparing their canonical forms.
-    //Assumes input strings are already in lowercase (handled in main).
     
     public static boolean isAnagram(String a, String b) {
         // Step 1: Check length (must be the same)
@@ -66,7 +62,7 @@ public class AnagramChecker {
         String anagramGroupsOutput = "";
         String ungroupedWordsOutput = "";
 
-        // Start Anagram Grouping
+        //Anagram Grouping
         
         for (int i = 0; i < n; i++) {
             // Skip if the word has already been used in a group
