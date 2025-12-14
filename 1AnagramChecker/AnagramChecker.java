@@ -3,12 +3,9 @@ import java.util.Arrays;
 
 public class AnagramChecker {
 
-<<<<<<< HEAD
-=======
     //Core Helper Function: Creates a unique, sorted character representation
     //Converts a string into its canonical form (sorted character array turned back into a string).
      
->>>>>>> 7d60ceac6158c8a734472bb54d8f533461539c3f
     private static String getCanonicalForm(String str) {
         
         char[] chars = str.toCharArray();
@@ -83,15 +80,9 @@ public class AnagramChecker {
         String anagramGroupsOutput = "";
         String ungroupedWordsOutput = "";
 
-<<<<<<< HEAD
-        // Start Anagram Grouping
-
-        for (int i = 0; i < uniqueCount; i++) {
-=======
         //Anagram Grouping
         
         for (int i = 0; i < n; i++) {
->>>>>>> 7d60ceac6158c8a734472bb54d8f533461539c3f
             // Skip if the word has already been used in a group
             if (grouped[i]) {
                 continue; 
