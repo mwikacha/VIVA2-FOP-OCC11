@@ -3,10 +3,6 @@ import java.util.Arrays;
 
 public class AnagramChecker {
 
-    // --- Core Helper Function: Creates a unique, sorted character representation ---
-    //Converts a string into its canonical form (sorted character array turned back into a string).
-    //allows two strings to be compared for anagram status without using HashMaps.
-     
     private static String getCanonicalForm(String str) {
         // Convert to character array
         char[] chars = str.toCharArray();
@@ -35,7 +31,6 @@ public class AnagramChecker {
         // Step 2: Compare the canonical forms
         String canonicalA = getCanonicalForm(a);
         String canonicalB = getCanonicalForm(b);
-        
         return canonicalA.equals(canonicalB);
     }
     
@@ -45,21 +40,40 @@ public class AnagramChecker {
 
         // 1. Input: Read N
         System.out.print("Enter the number of words (N): ");
-        int n = scanner.nextInt();
-        scanner.nextLine(); // Consume newline after reading int
+        int n = scanner.nextInt(); 
+        scanner.nextLine();
 
-        // 2. Input: Read N words and preprocess
         String[] originalWords = new String[n];
-        
         for (int i = 0; i < n; i++) {
-            System.out.print("Enter word " + (i + 1) + ": ");
-            // Convert to lowercase immediately to handle case-insensitivity
-            originalWords[i] = scanner.nextLine().toLowerCase(); 
+        System.out.print("Enter word " + (i + 1) + ": ");
+        // All words are read and immediately converted to lowercase
+        originalWords[i] = scanner.nextLine().toLowerCase();
         }
 
-        // 3. Tracking: Use a boolean array to track which words have been grouped
+        String[] uniqueWords = new String[n];
+        int uniqueCount = 0;
+
+        for (int i = 0; i < n; i++) {
+        String currentWord = originalWords[i];
+        boolean isDuplicate = false;
+
+        // Check if the current word is already in the uniqueWords array
+        for (int j = 0; j < uniqueCount; j++) {
+             if (currentWord.equals(uniqueWords[j])) { 
+                isDuplicate = true;
+                break;
+            }
+        }
+
+        if (!isDuplicate) {
+            uniqueWords[uniqueCount] = currentWord;
+            uniqueCount++;
+        }
+    }
+
+        //2. Tracking: Use a boolean array to track which words have been grouped
         //prevent duplicate grouping
-        boolean[] grouped = new boolean[n];
+        boolean[] grouped = new boolean[uniqueCount];
         int groupNumber = 1;
 
         // Output strings for organized printing
@@ -67,8 +81,8 @@ public class AnagramChecker {
         String ungroupedWordsOutput = "";
 
         // Start Anagram Grouping
-        
-        for (int i = 0; i < n; i++) {
+
+        for (int i = 0; i < uniqueCount; i++) {
             // Skip if the word has already been used in a group
             if (grouped[i]) {
                 continue; 
@@ -78,7 +92,7 @@ public class AnagramChecker {
             int groupSize = 0;
 
             // Check word[i] against all words (starting from i)
-            for (int j = i; j < n; j++) {
+            for (int j = i; j < uniqueCount; j++) {
                 // Check if they are anagrams AND word 'j' hasn't been grouped yet
                 if (!grouped[j] && isAnagram(originalWords[i], originalWords[j])) {
                     currentGroupWords += originalWords[j] + " ";
@@ -86,8 +100,18 @@ public class AnagramChecker {
                     groupSize++;
                 }
             }
-            
-            // 4. Output Logic
+
+            if (groupSize > 1) {
+                // If no anagrams found, continue to next word
+                anagramGroupsOutput += "Anagram group " + groupNumber + ": " + currentGroupWords.trim() + "\n";
+                groupNumber++;
+            } else {
+                // If no anagrams found, add to ungrouped words
+                ungroupedWordsOutput += uniqueWords[i] + " ";
+            }
+        
+                
+            //3. Output Logic
             if (groupSize > 1) {
                 // True Anagram Group (size > 1)
                 anagramGroupsOutput += "Anagram group " + groupNumber + ": " + currentGroupWords.trim() + "\n";
@@ -95,14 +119,13 @@ public class AnagramChecker {
             } else {
                 // Ungrouped Word (size 1) - If it wasn't an anagram of anything else
                 // Note: The word[i] itself is the only one in the group of size 1
-                ungroupedWordsOutput += originalWords[i] + " ";
+                ungroupedWordsOutput += uniqueWords[i] + " ";
             }
         }
         
-        // 5. Final Display
+        //4. Final Display
         System.out.println("\n Anagram Group Results");
         System.out.print(anagramGroupsOutput);
-        
         System.out.println("\n Remaining Words");
         System.out.println("Without anagram group: " + ungroupedWordsOutput.trim());
         
