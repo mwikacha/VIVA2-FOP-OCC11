@@ -3,11 +3,15 @@ import java.util.Arrays;
 
 public class AnagramChecker {
 
+<<<<<<< HEAD
+=======
+    //Core Helper Function: Creates a unique, sorted character representation
+    //Converts a string into its canonical form (sorted character array turned back into a string).
+     
+>>>>>>> 7d60ceac6158c8a734472bb54d8f533461539c3f
     private static String getCanonicalForm(String str) {
-        // Convert to character array
-        char[] chars = str.toCharArray();
         
-        // Sort the array (This is the key to the canonical form)
+        char[] chars = str.toCharArray();
         Arrays.sort(chars);
         
         // Return the sorted string
@@ -20,7 +24,6 @@ public class AnagramChecker {
 
     //Method 1: isAnagram
     //Checks if string 'a' and string 'b' are anagrams by comparing their canonical forms.
-    //Assumes input strings are already in lowercase (handled in main).
     
     public static boolean isAnagram(String a, String b) {
         // Step 1: Check length (must be the same)
@@ -80,9 +83,15 @@ public class AnagramChecker {
         String anagramGroupsOutput = "";
         String ungroupedWordsOutput = "";
 
+<<<<<<< HEAD
         // Start Anagram Grouping
 
         for (int i = 0; i < uniqueCount; i++) {
+=======
+        //Anagram Grouping
+        
+        for (int i = 0; i < n; i++) {
+>>>>>>> 7d60ceac6158c8a734472bb54d8f533461539c3f
             // Skip if the word has already been used in a group
             if (grouped[i]) {
                 continue; 
